@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Chat;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class GetChatController extends Controller
+class GetChatController extends BaseController
 {
-    public function __invoke ()
+    public function __invoke ($id)
     {
-        return view('chat');
+        $anketa = $this->service->getAnket($id);
+        $chat = $this->service->getChat($id);
+
+        return view('chat', compact('anketa', 'chat'));
     }
 }

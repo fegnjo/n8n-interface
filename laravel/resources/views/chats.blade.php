@@ -2,6 +2,13 @@
 @section('content')
     <div class="container">
         <h1>Чаты</h1>
+        <form action="{{route('chats')}}" method="get">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"></label>
+                <input name="search_field" @if(isset($_GET['search_field'])) value="{{$_GET['search_field']}}" @endif type="text" class="form-control" id="exampleFormControlInput1" placeholder="Поиск">
+            </div>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
         <table class="table table-striped">
             <thead>
             <tr>

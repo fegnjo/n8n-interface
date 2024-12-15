@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Chat;
 
-class StatController
+class StatController extends BaseController
 {
+
     public function index()
     {
-        return view('stat');
+        $count = $this->service->getStat();
+
+//        dd($this->count);
+
+
+        return view('stat')->with('count', $count);
     }
 }

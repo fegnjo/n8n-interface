@@ -1,74 +1,59 @@
 @extends('layouts/app')
 @section('content')
-    <div class="container">
-        <div class="container">
-            <div class="row d-flex justify-content-start">
-                Статистика
-            </div>
-            <div class="row d-flex justify-content-start">
-                Анкета
-            </div>
+
+    <div class="">
+        <div class="text-wrap float-start" style="width: 40rem;">
+        <h1>Анкета</h1>
+            @if($anketa)
+                @foreach($anketa as $ank) {{$ank}} <br> @endforeach
+            @else
+                {{'Анкета отсутсвует'}}
+            @endif
         </div>
-        <div class="container">
-            <div class="row d-flex justify-content-end max-width:100">
-                <div class="col-md-6">
-                    <!-- DIRECT CHAT PRIMARY -->
-                    <div class="box box-primary direct-chat direct-chat-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">|ИМЯ БОТА|</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <!-- Conversations are loaded here -->
-                            <div class="direct-chat-messages">
-                                <!-- Message. Default to the left -->
-                                <div class="direct-chat-msg">
-                                    <div class="direct-chat-info clearfix">
-                                        <span class="direct-chat-name pull-left">Имя пользователя</span>
-                                        <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-                                    </div>
-                                    <!-- /.direct-chat-info -->
-                                    <div class="direct-chat-text">
-                                        Is this template really for free? That's unbelievable!
-                                    </div><div class="direct-chat-text">
-                                        Is this template really for free? That's unbelievable!
-                                    </div><div class="direct-chat-text">
-                                        Is this template really for free? That's unbelievable!
-                                    </div><div class="direct-chat-text">
-                                        Is this template really for free? That's unbelievable!
-                                    </div><div class="direct-chat-text">
-                                        Is this template really for free? That's unbelievable!
-                                    </div>
-                                    <!-- /.direct-chat-text -->
-                                </div>
-                                <!-- /.direct-chat-msg -->
+        <div class="float-end" style="width: 60rem;">
+            <h1>Чат</h1>
+            <div>
+                <div class="">
+                    <div class="col-10 chat-messages card">
 
-                                <!-- Message to the right -->
-                                <div class="direct-chat-msg right">
-                                    <div class="direct-chat-info clearfix">
-                                        <span class="direct-chat-name pull-right">Имя бота</span>
-                                        <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                                    </div>
-                                    <!-- /.direct-chat-info -->
-                                    <div class="direct-chat-text">
-                                        You better believe it!
-                                    </div>
-                                    <!-- /.direct-chat-text -->
-                                </div>
-                                <!-- /.direct-chat-msg -->
-                            </div>
-                            <!--/.direct-chat-messages-->
+                        @foreach($chat as $message)
 
-                            <!-- Contacts are loaded here -->
-                            <!-- /.direct-chat-pane -->
-                        </div>
-                        <!-- /.box-footer-->
+                            @if($message['is_bot'] == 'True')
+                                <div class="chat-message-right pb-4">
+                                    <div>
+{{--                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">--}}
+                                        <img src="{{asset('/images/кот.jpg')}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+
+                                        <div class="text-muted small text-nowrap mt-2">{{date('Y-m-d H:m:s', intval($message['message_time']))}}</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+{{--                                        <div class="font-weight-bold mb-1"><b>Бот</b></div>--}}
+                                        <b>{{"Бот: :" }}</b> {{ $message['message']}}
+                                    </div>
+                                </div>
+                            @else
+                                <div class="chat-message-left pb-4">
+                                    <div>
+{{--                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">--}}
+                                        <img src="{{asset('/images/толератность.jpg')}}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+
+                                        <div class="text-muted small text-nowrap mt-2">{{date('Y-m-d H:m:s', intval($message['message_time']))}}</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+{{--                                        <div class="font-weight-bold mb-1"><b>Соискатель</b></div>--}}
+                                        <b>{{"Соискатель: :" }}</b> {{ $message['message']}}
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+
+
                     </div>
-                    <!--/.direct-chat -->
-                </div>
 
+                </div>
             </div>
         </div>
 
     </div>
+
 @endsection
