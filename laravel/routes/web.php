@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckPeriod;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['namespace' => 'Chat'], function() {
-        Route::get('/', 'StatController@index')->name('home');
+        Route::get('/', 'StatController@index')->name('home')->middleware('check.period');
         Route::get('/chats', 'GetAllController')->name('chats');
         Route::get('/chats/{id}', 'GetChatController')->name('chat');
     });

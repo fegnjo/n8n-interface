@@ -18,12 +18,12 @@ class Service
         return Chat::groupBy('username')->filter($filter)->paginate(15);
     }
 
-    public function getStat()
+    public function getStat($filter = '')
     {
-        $this->count_chats = Chat::groupBy('user_id')->get()->count();
-        $this->count_ankets = Ankets::groupBy('user_id')->get()->count();
-        $this->dialogue = Chat::groupBy('user_id')->where('status', 'toWork')->get()->count();
-        $this->completed = Chat::groupBy('user_id')->where('status', 'archive')->get()->count();
+        $this->count_chats = Chat::groupBy('user_id')->filter($filter)->get()->count();
+        $this->count_ankets = Ankets::groupBy('user_id')->filter($filter)->get()->count();
+        $this->dialogue = Chat::groupBy('user_id')->where('status', 'toWork')->filter($filter)->get()->count();
+        $this->completed = Chat::groupBy('user_id')->where('status', 'archive')->filter($filter)->get()->count();
 
         return $this;
     }
